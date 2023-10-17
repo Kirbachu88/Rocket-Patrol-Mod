@@ -8,10 +8,12 @@ class Play extends Phaser.Scene {
         // Load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('scoutship', './assets/scoutship.png');
         this.load.image('starfield', './assets/starfield.png');
 
         // Load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('scoutExplosion', './assets/scoutexplosion.png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
 
     create() {
@@ -25,7 +27,10 @@ class Play extends Phaser.Scene {
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0, 0);
-        
+
+        // Add scoutship
+        this.scoutship01 = new Scoutship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'scoutship', 0, 50).setOrigin(0, 0);
+
         // x-coordinate, y-coordinate, width, height, color (hexadecimal)
         // Green UI Background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
@@ -46,6 +51,12 @@ class Play extends Phaser.Scene {
         this.anims.create({
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 9, first: 0}),
+            frameRate: 30
+        });
+
+        this.anims.create({
+            key: 'scoutExplode',
+            frames: this.anims.generateFrameNumbers('scoutExplosion', {start: 0, end: 9, first: 0}),
             frameRate: 30
         });
 
@@ -92,10 +103,11 @@ class Play extends Phaser.Scene {
         this.starfield.tilePositionX -= 4;
 
         if (!this.gameOver) {
-            this.p1Rocket.update(); // Update rocket sprite
-            this.ship01.update();   // Update spaceships (x3)
+            this.p1Rocket.update();     // Update rocket sprite
+            this.ship01.update();       // Update spaceships (x3)
             this.ship02.update();
             this.ship03.update();
+            this.scoutship01.update();  // Update scoutship
         }
 
         // Check Collisions
@@ -110,6 +122,10 @@ class Play extends Phaser.Scene {
         if (this.checkCollision(this.p1Rocket, this.ship01)) {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
+        }
+        if (this.checkCollision(this.p1Rocket, this.scoutship01)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.scoutship01);
         }
     }
 
@@ -130,8 +146,14 @@ class Play extends Phaser.Scene {
         ship.alpha = 0;
 
         // Create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
-        boom.anims.play('explode');             // Play explode animation
+        let boom;
+        if (ship instanceof Scoutship) {
+            boom = this.add.sprite(ship.x, ship.y, 'scoutExplosion').setOrigin(0, 0);
+            boom.anims.play('scoutExplode');         // Play explode animation
+        } else {
+            boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+            boom.anims.play('explode');         // Play explode animation
+        }
         boom.on('animationcomplete', () => {    // Callback after anim completes
             ship.reset()                        // Reset ship position
             ship.alpha = 1;                     // Make ship visible again
