@@ -88,6 +88,9 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        // Background Music
+        this.sound.play('bgm');
     }
 
     update() {
@@ -149,7 +152,7 @@ class Play extends Phaser.Scene {
         let boom;
         if (ship instanceof Scoutship) {
             boom = this.add.sprite(ship.x, ship.y, 'scoutExplosion').setOrigin(0, 0);
-            boom.anims.play('scoutExplode');         // Play explode animation
+            boom.anims.play('scoutExplode');    // Play explode animation
         } else {
             boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
             boom.anims.play('explode');         // Play explode animation

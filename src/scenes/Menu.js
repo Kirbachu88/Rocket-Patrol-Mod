@@ -13,6 +13,7 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx_explosion4', './assets/explosion4.wav');
         this.load.audio('sfx_explosion5', './assets/explosion5.wav');
         this.load.audio('sfx_rocket', './assets/takeoff.wav');
+        this.load.audio('bgm', './assets/02 HoliznaCC0 - Level 3 - Lowered Volume.mp3');
     }
 
     create() {
