@@ -24,9 +24,9 @@ class Play extends Phaser.Scene {
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
         
         // Add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0, 0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 10).setOrigin(0, 0);
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 30).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 6 + borderPadding * 4, 'spaceship', 0, 20).setOrigin(0, 0);
+        this.ship03 = new Spaceship(this, game.config.width,                    borderUISize * 7 + borderPadding * 6, 'spaceship', 0, 10).setOrigin(0, 0);
 
         // Add scoutship
         this.scoutship01 = new Scoutship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'scoutship', 0, 50).setOrigin(0, 0);
@@ -89,6 +89,14 @@ class Play extends Phaser.Scene {
             bgm.destroy();
             this.gameOver = true;
         }, null, this);
+
+        // 30-Second Speed Up
+        this.speedUp = this.time.delayedCall(30000, () => {
+            this.ship01.moveSpeed++;
+            this.ship02.moveSpeed++;
+            this.ship03.moveSpeed++;
+            this.scoutship01.moveSpeed++;
+        })
 
         // Background Music
         let bgm = this.sound.add('bgm');
