@@ -77,7 +77,25 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
-    
+
+        // Initialize time
+        this.timeRemaining = game.settings.gameTimer / 1000
+
+        // Display time
+        let timeConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5
+            },
+            fixedWidth: 50
+        }
+        this.timeRight = this.add.text(game.config.width - borderUISize - borderPadding - timeConfig.fixedWidth, borderUISize + borderPadding * 2, this.timeRemaining, timeConfig);
+  
         // GAME OVER flag
         this.gameOver = false;
 
@@ -140,6 +158,9 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.shipExplode(this.scoutship01);
         }
+
+        // Update timer
+        this.timeRight.setText(Math.ceil((game.settings.gameTimer / 1000) - (this.clock.getProgress() * (game.settings.gameTimer / 1000))));
     }
 
     checkCollision(rocket, ship) {
