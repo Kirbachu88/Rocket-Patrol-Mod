@@ -160,7 +160,7 @@ class Play extends Phaser.Scene {
         }
 
         // Update timer
-        this.timeRight.setText(Math.ceil((game.settings.gameTimer / 1000) - (this.clock.getElapsedSeconds())));
+        this.timeRight.setText(Math.ceil(this.clock.getOverallRemainingSeconds()));
     }
 
     checkCollision(rocket, ship) {
