@@ -1,3 +1,21 @@
+/***********************************************/
+/* Author: Angela Ku
+/* Title:  Rocket Patrol Mod
+/* Time:   ?
+/* Mods List
+/* 1-Point Tier
+/* 
+/* 
+/* 3-Point Tier
+/* 
+/* 
+/* 5-Point Tier
+/* 
+/* 
+/* Citations
+/* 
+/***********************************************/
+
 let config = {
     type: Phaser.AUTO,
     width: 640,
