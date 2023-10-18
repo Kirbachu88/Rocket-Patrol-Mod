@@ -160,7 +160,7 @@ class Play extends Phaser.Scene {
         }
 
         // Update timer
-        this.timeRight.setText(Math.ceil((game.settings.gameTimer / 1000) - (this.clock.getProgress() * (game.settings.gameTimer / 1000))));
+        this.timeRight.setText(Math.ceil((game.settings.gameTimer / 1000) - (this.clock.getElapsedSeconds())));
     }
 
     checkCollision(rocket, ship) {
@@ -196,6 +196,8 @@ class Play extends Phaser.Scene {
         // Score add and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;
+
+        // Time add
         
         // Play explosion sound effect
         // Sound config
