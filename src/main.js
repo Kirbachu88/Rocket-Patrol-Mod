@@ -1,16 +1,22 @@
 /***********************************************/
 /* Author: Angela Ku
 /* Title:  Rocket Patrol Mod
-/* Time:   ?
+/* Time:   12h
+/*
 /* Mods List
 /* 1-Point Tier
-/* 
+/* Implement the 'FIRE' UI text from the original game
+/* Add your own (copyright-free) looping background music to the Play scene (keep the volume low and be sure that multiple instances of your music don't play when the game restarts)
+/* Implement the speed increase that happens after 30 seconds in the original game
 /* 
 /* 3-Point Tier
-/* 
+/* Create 4 new explosion sound effects and randomize which one plays on impact
+/* Display the time remaining (in seconds) on the screen
+/* Create a new title screen (e.g., new artwork, typography, layout)
+/* Implement parallax scrolling for the background
 /* 
 /* 5-Point Tier
-/* 
+/* Create a new enemy Spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points
 /* 
 /* Citations
 /* - Class checking: "instanceof" - https://javascript.info/instanceof
