@@ -13,7 +13,7 @@
 /* 
 /* 
 /* Citations
-/* 
+/* - Class checking: "instanceof" - https://javascript.info/instanceof
 /***********************************************/
 
 let config = {
