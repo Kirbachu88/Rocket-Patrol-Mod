@@ -78,6 +78,25 @@ class Play extends Phaser.Scene {
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
 
+        // Initialize 'FIRE' text
+        this.fire = ''
+
+        // Display 'FIRE'
+        let fireConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5
+            },
+            fixedWidth: 70
+        }
+        this.fireCenter = this.add.text(game.config.width / 2, borderUISize + borderPadding * 2, this.fire, fireConfig);
+
+
         // Initialize time
         this.timeRemaining = game.settings.gameTimer / 1000
 
@@ -157,6 +176,13 @@ class Play extends Phaser.Scene {
         if (this.checkCollision(this.p1Rocket, this.scoutship01)) {
             this.p1Rocket.reset();
             this.shipExplode(this.scoutship01);
+        }
+
+        // Display 'FIRE'
+        if (this.p1Rocket.isFiring) {
+            this.fireCenter.text = 'FIRE'
+        } else {
+            this.fireCenter.text = ''
         }
 
         // Update timer
