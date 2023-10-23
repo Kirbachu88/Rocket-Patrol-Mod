@@ -181,8 +181,10 @@ class Play extends Phaser.Scene {
         // Display 'FIRE'
         if (this.p1Rocket.isFiring) {
             this.fireCenter.text = 'FIRE'
+            this.fireCenter.alpha = 1
         } else {
             this.fireCenter.text = ''
+            this.fireCenter.alpha = 0
         }
 
         // Update timer
