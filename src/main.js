@@ -20,6 +20,7 @@
 /* 
 /* Citations
 /* - Class checking: "instanceof" - https://javascript.info/instanceof
+/* - Selecting a random array element - https://www.geeksforgeeks.org/how-to-select-a-random-element-from-array-in-javascript/
 /***********************************************/
 
 let config = {
